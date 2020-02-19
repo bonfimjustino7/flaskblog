@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>{{ titulo }}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <meta name="theme-color" content="#563d7c">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/album.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Sobre</h4>
+          <p class="text-muted">Fale um pouco sobre vocês...</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contato</h4>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white">Link do Twiiter</a></li>
+            <li><a href="#" class="text-white">Link do Facebook</a></li>
+            <li><a href="#" class="text-white">Outros</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="/" class="navbar-brand d-flex align-items-center">
+        <strong>{{ titulo }}</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>{{ titulo }}</h1>
+      <form action="" method="POST">
+        {{ form.csrf_token }}
+        {{ form.nome.label }} {{ form.nome(size=20) }}<br>
+        {{ form.email.label }} {{ form.email(size=20) }}<br>
+        <input type="submit" value="Enviar">
+      </form>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for post in posts %}
+        <div class="col-md-12">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <p class="card-text">{{ post.content }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ post.like }} Like</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">{{ post.unlike}} Unlike</button>
+                </div>
+                <small class="text-muted">{{ post.date }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}  
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Ir para o topo</a>
+    </p>
+    <p>Projeto criado na disciplina de PWEB1, do curso de Bacharelado em Sistemas de Informação, IFCE - Cedro.</p>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>');
+      </script>
+      <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script></body>
+
+</html>
